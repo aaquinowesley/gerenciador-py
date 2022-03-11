@@ -3,9 +3,11 @@
 
 import os
 from platform import *
+from requests import get
 
 so = system()
 os.path.abspath('python/index.py')
+ip = get('https://api.ipify.org').content.decode('utf8')
 
 class printer():
     _colors_ = {
@@ -37,7 +39,6 @@ class printer():
 
 
 message = printer()
-
 
 def MoveFile(path, pathToDestination):
     # In Linux
@@ -72,31 +73,52 @@ def menu():
         option = 0
         while option != 5:
             print('''   choose an option from 1 to 5
-                [1] seila o que    
+                [1] IP   
                 [2] Sistema Operacional 
                 [3] Limpando a Tela
                 [4] Copiar Arquivos 
                 [5] Sair ''')
             option = int(input('$:'))
             if option == 1:
-                print('teste 1')
+                print('My public IP address is: {}'.format(ip))
             elif option == 2:
                 checkOs()
             elif option == 3:
                 clearOrCls()
             elif option == 4:
-                # a = str(input('>> Digite o arquivo \n>'))
-                # b = str(input('>> Digite o arquivo \n>'))
-                # copyFile()
+                message.print(msg='follow the syntax below', color='YELLOW')
+                message.print(msg='Syntax file.text  locale', color='YELLOW')
+                a = str(input('>> Digite o arquivo \n>'))
+                b = str(input('>> Digite o arquivo \n>'))
+                copyFile(a,b)
                 print('...')
             elif option == 5:
-                message.print(msg='>>>>>>>>> EXIT <<<<<<<<<', color='GREEN')    
+                print(''' 
+                          ⠄⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣀
+                          ⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                          ⠄⣾⣿⠿⠛⣉⣁⣤⣤⣤⣤⣬⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠛⠛⠛⠻⠿⠿⣿
+                          ⣾⣿⣿⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣶⣤⡈
+                          ⣿⣿⣿⣿⠛⢋⠉⠩⠉⢩⣙⠛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⣿⣿⣿
+                          ⣿⣿⣿⣿⣿⣿⠿⠶⢶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣶⣏⣁⡁⣐⣆⠈⢻
+                          ⣿⣿⣿⣿⣿⣿⣿⣿⡿⢋⣥⣤⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣭⣭⣭⣿⣾⣿
+                          ⣿⣿⣿⣿⣿⣿⣿⠿⢀⣿⣿⡿⢁⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                          ⢿⣿⣿⣿⣿⣿⢋⣴⣿⣿⠏⢡⣾⣿⣿⣿⣿⣿⣿⣿⡟⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                          ⡈⠙⠛⠛⠻⢃⣼⣿⣿⠏⣐⠻⠿⠿⠿⠿⣿⣿⣿⣿⣿⡜⢿⣿⣿⣿⣿⣿⣿⣿
+                          ⣿⣿⣿⡿⢳⣾⣿⣿⠋⣼⣿⣷⣄⠄⠄⠄⠄⠈⠄⢀⣾⣿⣆⠹⣿⣿⡿⠛⠋⠁
+                          ⣿⣿⡟⣀⣿⣿⣿⠛⣠⣄⢹⣿⣿⣧⣤⣄⣀⣤⣶⣾⣿⡿⣿⡆⢻⡟⠁⢀⡀⠄
+                          ⣿⣿⣷⣿⣿⣿⢣⣾⣿⣿⠄⠉⠄⠄⠈⠉⠉⠃⠉⠉⠛⠃⠉⠈⣾⣷⠾⠟⠁⢠
+                          ⠈⠛⠿⣿⣿⣿⣿⣿⣿⠃⣶⣆⢰⣶⣶⣶⣶⠶⠒⢀⣀⣄⣠⣴⡟⠁⠄⠄⣰⣿
+                          ⠄⠄⠄⠄⠈⠻⠿⠿⠏⣾⡿⠃⠈⠉⠉⠛⠄⠘⠛⣻⣿⣿⣿⣿⣿⡇⣠⣾⣿⣿                     ''')
+                message.print(msg='>>>>>>>>>>> EXIT <<<<<<<<<<<', color='GREEN')
+                message.print(msg='By Wesley ( ͡° ͜ʖ ͡°)', color='CYAN')        
             else:
                 print('Opção inválida. Tente novamente!')
+                clearOrCls()
             print('' * 20)
-    except Exception as error:
-        print(f'Do not type letters only numbers from 1 to 5{error.__class__}')
+    except (ValueError, TypeError):
+        message.print(msg=' Do not type letters only numbers from 1 to 5', color='RED')
         menu()
-    # finally:
-    #     pass
+    except KeyboardInterrupt:
+        message.print(msg=' Unreported Data!', color='RED')
+        menu()
 menu()
